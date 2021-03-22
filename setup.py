@@ -23,7 +23,7 @@ setup_args = dict(
 
 install_requires = [
     'multiprocess',
-    'functools'
+    'pandas'
 ]
 
 if __name__ == '__main__':

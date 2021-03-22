@@ -7,7 +7,9 @@ Author: Shahnawaz Akhtar
 Author-email: shahnawaz.akhtar@barcelonagse.eu
 License: MIT
 Download-URL: https://pypi.org/project/multiprocesspandas/
-Description: 
+Description: # Multiprocess Pandas
+        
+        This library extends Pandas to run apply methods for DataFrames, Series and GroupBys on multiple cores at same time.
         
         
 Keywords: Pandas,Multiprocessing,Pandas Multiprocessing,Parallel,Parallize Pandas
