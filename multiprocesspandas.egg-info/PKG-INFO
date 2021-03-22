@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: multiprocesspandas
+Version: 0.1.0
+Summary: Extends Pandas to run apply methods for  dataframe, series and groups on multiple cores at same time.
+Home-page: https://github.com/akhtarshahnawaz/multiprocesspandas
+Author: Shahnawaz Akhtar
+Author-email: shahnawaz.akhtar@barcelonagse.eu
+License: MIT
+Download-URL: https://pypi.org/project/multiprocesspandas/
+Description: 
+        
+        
+Keywords: Pandas,Multiprocessing,Pandas Multiprocessing,Parallel,Parallize Pandas
+Platform: UNKNOWN
+Description-Content-Type: text/markdown

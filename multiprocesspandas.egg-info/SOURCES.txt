@@ -1,0 +1,9 @@
+README.md
+setup.py
+multiprocesspandas/__init__.py
+multiprocesspandas/applyparallel.py
+multiprocesspandas.egg-info/PKG-INFO
+multiprocesspandas.egg-info/SOURCES.txt
+multiprocesspandas.egg-info/dependency_links.txt
+multiprocesspandas.egg-info/requires.txt
+multiprocesspandas.egg-info/top_level.txt
