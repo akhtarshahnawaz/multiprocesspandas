@@ -78,9 +78,13 @@ def df_apply_parallel(self, func, static_data=None, num_processes = cpu_count(),
         elif axis==1:
             ret_list = p.map(func, [col for _, col in self.items()])
     if isinstance(ret_list[0], pd.DataFrame) or isinstance(ret_list[0], pd.DataFrame):
-        return pd.concat(ret_list, keys=self.index,names=self.index.name, axis=0)
+        if axis==0:
+            return pd.concat(ret_list, keys=self.index,names=self.index.name, axis=0)
+        elif axis==1:
+            return pd.concat(ret_list, keys=self.columns, axis=0)
+        
     
-    return pd.Series(ret_list, index=self.index)
+    return pd.Series(ret_list, index=self.index) if axis==0 else pd.Series(ret_list, index=self.columns)
 
 pd.core.frame.DataFrame.apply_parallel = df_apply_parallel
 
