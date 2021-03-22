@@ -1,2 +1,2 @@
-multiprocess
+multiprocess==0.70.11.1
 pandas
