@@ -1,2 +1,2 @@
 multiprocess
-functools
+pandas
