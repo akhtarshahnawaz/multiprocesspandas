@@ -22,7 +22,7 @@ setup_args = dict(
 )
 
 install_requires = [
-    'multiprocess',
+    'multiprocess==0.70.11.1',
     'pandas'
 ]
 
