@@ -8,7 +8,7 @@ with open('HISTORY.md') as history_file:
 
 setup_args = dict(
     name='multiprocesspandas',
-    version='0.1.0',
+    version='0.1.1',
     description='Extends Pandas to run apply methods for  dataframe, series and groups on multiple cores at same time.',
     long_description_content_type="text/markdown",
     long_description=README + '\n\n' + HISTORY,
