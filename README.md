@@ -1,8 +1,8 @@
 # MultiprocessPandas
 
-MultiprocessPandas package extends functionality of Pandas to easily run operations on multiple cores. The current version of the package provides capability to parallelize ***apply()*** methods on DataFrames, Series and DataFrameGroupBy .
+MultiprocessPandas package extends functionality of Pandas to easily run operations on multiple cores i.e. parallelize the operations. The current version of the package provides capability to parallelize ***apply()*** methods on DataFrames, Series and DataFrameGroupBy .
 
-Importing the applyparallel module will add ***apply_parallel()*** method to DataFrame, Series and DataFrameGroupBy , and will run operation on multiple cores.
+Importing the applyparallel module will add ***apply_parallel()*** method to DataFrame, Series and DataFrameGroupBy, which will allow to run operation on multiple cores.
 
 ## Installation
 The source code is currently hosted on GitHub at: [https://github.com/akhtarshahnawaz/multiprocesspandas](https://github.com/akhtarshahnawaz/multiprocesspandas). The package can be build from the source from GitHub or can be installed from PyPi directly. 
