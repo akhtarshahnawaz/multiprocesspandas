@@ -2,17 +2,17 @@
 
 MultiprocessPandas package extends functionality of Pandas to easily run operations on multiple cores i.e. parallelize the operations. The current version of the package provides capability to parallelize ***apply()*** methods on DataFrames, Series and DataFrameGroupBy .
 
-Importing the applyparallel module will add ***apply_parallel()*** method to DataFrame, Series and DataFrameGroupBy, which will allow to run operation on multiple cores.
+Importing the applyparallel module will add ***apply_parallel()*** method to DataFrame, Series and DataFrameGroupBy, which will allow you to run operation on multiple cores.
 
 ## Installation
-The source code is currently hosted on GitHub at: [https://github.com/akhtarshahnawaz/multiprocesspandas](https://github.com/akhtarshahnawaz/multiprocesspandas). The package can be build from the source from GitHub or can be installed from PyPi directly. 
+The source code is currently hosted on GitHub at: [https://github.com/akhtarshahnawaz/multiprocesspandas](https://github.com/akhtarshahnawaz/multiprocesspandas). The package can be pulled from GitHub or can be installed from PyPi directly. 
 
 To install using pip
 
     pip install multiprocesspandas
 
 ## Setting up the Library
-To use the library, you have to import applyparallel module. Import will attach required methods to the pandas, and you can call them directly on Pandas data objects. 
+To use the library, you have to import applyparallel module. Import will attach required methods to pandas, and you can call them directly on Pandas data objects. 
 
     from multiprocesspandas import applyparallel
 
@@ -23,7 +23,7 @@ Once imported, the library adds functionality to call ***apply_parallel()*** met
  - ***num_processes*** (Defaults to maximum available cores on your CPU)
  - ***axis*** (Only for DataFrames, defaults to 0 i.e. rows. For columns, set axis=1.
 
-***Note:** Any extra module required by passed function must be re-imported again inside the function.*
+***Note:** Any extra module required by the passed function must be re-imported again inside the function.*
 
 ### Usage with DataFrameGroupBy 
 
@@ -33,7 +33,7 @@ Once imported, the library adds functionality to call ***apply_parallel()*** met
 
     df.groupby(["A","B"]).apply_parallel(func, num_processes=30)
 
-If you need some external data inside **func()**, it has to be passed and received as named argument ***static_data***. If there is more that one external data that is needed, then static_data can be a list of all required data, and can be accessed inside func by indexing.
+If you need some external data inside **func()**, it has to be passed and received as named argument ***static_data***. If there is more that one external data that is required, then static_data can be a list of all required data, and can be accessed inside func by indexing.
 
     data1 = pd.Series([1,2,3])
     data2 = 20
@@ -46,14 +46,14 @@ If you need some external data inside **func()**, it has to be passed and receiv
     df.groupby(["A","B"]).apply_parallel(func, num_processes=30, static_data=[data1, data2])
 
 ### Usage with DataFrame
-Usage with DataFrames is very similar to the usage with DataFrameGroupBy, except that you can pass an extra axis argument which tells whether to apply function on rows or columns.
+Usage with DataFrames is very similar to the one with DataFrameGroupBy, however you have to pass an extra argument 'axis' which tells whether to apply function on  the rows or the columns.
 
     def func(x):
         return x.mean()
 
     df.apply_parallel(func, num_processes=30, axis=1)
 
-External data can be passed in similar way
+External data can be passed in same way as we did in DataFrameGroupBy
 
     data = pd.Series([1,2,3])
     
