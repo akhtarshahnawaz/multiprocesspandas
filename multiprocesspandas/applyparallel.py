@@ -31,7 +31,7 @@ def group_apply_parallel(self, func, static_data=None, num_processes = cpu_count
     with Pool(num_processes) as p:
         ret_list = p.map(func, [df.copy() for idx, df in self])
 
-    if isinstance(ret_list[0], pd.DataFrame) or isinstance(ret_list[0], pd.DataFrame):
+    if isinstance(ret_list[0], pd.DataFrame):
         return pd.concat(ret_list, keys=[idx for idx, df in self],names=self.keys, axis=0)
     
     out = pd.DataFrame([idx for idx, df in self], columns=self.keys)
@@ -54,7 +54,7 @@ def series_apply_parallel(self, func, static_data=None, num_processes = cpu_coun
     with Pool(num_processes) as p:
         ret_list = p.map(func, self.values.tolist())
 
-    if isinstance(ret_list[0], pd.DataFrame) or isinstance(ret_list[0], pd.DataFrame):
+    if isinstance(ret_list[0], pd.DataFrame):
         return pd.concat(ret_list, keys=self.index,names=self.index.name, axis=0)
     
     return pd.Series(ret_list, index=self.index)
@@ -77,7 +77,7 @@ def df_apply_parallel(self, func, static_data=None, num_processes = cpu_count(),
             ret_list = p.map(func, [row for _, row in self.iterrows()])
         elif axis==1:
             ret_list = p.map(func, [col for _, col in self.items()])
-    if isinstance(ret_list[0], pd.DataFrame) or isinstance(ret_list[0], pd.DataFrame):
+    if isinstance(ret_list[0], pd.DataFrame):
         if axis==0:
             return pd.concat(ret_list, keys=self.index,names=self.index.name, axis=0)
         elif axis==1:
