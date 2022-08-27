@@ -33,7 +33,7 @@ Once imported, the library adds functionality to call ***apply_parallel()*** met
 
     df.groupby(["A","B"]).apply_parallel(func, num_processes=30)
 ```
-If you need some external data inside **func()**, it has to be passed and received as named argument ***static_data***. If there is more that one external data that is required, then static_data can be a list of all required data, and can be accessed inside func by indexing.
+If you need some external data inside **func()**, it has to be passed and received as position argumnets or keyword arguments.
 ```python
     data1 = pd.Series([1,2,3])
     data2 = 20
@@ -43,7 +43,7 @@ If you need some external data inside **func()**, it has to be passed and receiv
         output = static_data[0] - x['C'].mean()
         return output * static_data[1]
 	
-    df.groupby(["A","B"]).apply_parallel(func, num_processes=30, static_data=[data1, data2])
+    df.groupby(["A","B"]).apply_parallel(func, static_data, num_processes=30)
 ```
 ### Usage with DataFrame
 Usage with DataFrames is very similar to the one with DataFrameGroupBy, however you have to pass an extra argument 'axis' which tells whether to apply function on  the rows or the columns.
@@ -60,7 +60,7 @@ External data can be passed in same way as we did in DataFrameGroupBy
     def func(x, static_data):
         return static_data.sum() + x.mean()
 	
-    df.apply_parallel(func, num_processes=30, static_data=data)
+    df.apply_parallel(func, static_data, num_processes=30)
 ```
 ### Usage with Series
 Usage with Series is very similar to the usage with DataFrames and DataFrameGroupBy.
@@ -70,5 +70,5 @@ Usage with Series is very similar to the usage with DataFrames and DataFrameGrou
     def func(x, static_data):
 	    return static_data-x
     
-    series.apply_parallel(func, num_processes=30, static_data=data)
+    series.apply_parallel(func, static_data, num_processes=30)
 ```
