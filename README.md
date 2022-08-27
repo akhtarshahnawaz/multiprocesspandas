@@ -33,17 +33,17 @@ Once imported, the library adds functionality to call ***apply_parallel()*** met
 
     df.groupby(["A","B"]).apply_parallel(func, num_processes=30)
 ```
-If you need some external data inside **func()**, it has to be passed and received as position argumnets or keyword arguments.
+If you need some external data inside **func()**, it has to be passed and received as position arguments or keyword arguments.
 ```python
     data1 = pd.Series([1,2,3])
     data2 = 20
     
-    def func(x, static_data):
+    def func(x, data1, data2):
         import pandas as pd
-        output = static_data[0] - x['C'].mean()
-        return output * static_data[1]
+        output = data1 - x['C'].mean()
+        return output * data2
 	
-    df.groupby(["A","B"]).apply_parallel(func, static_data, num_processes=30)
+    df.groupby(["A","B"]).apply_parallel(func, data1=data1, data2=data2, num_processes=30)
 ```
 ### Usage with DataFrame
 Usage with DataFrames is very similar to the one with DataFrameGroupBy, however you have to pass an extra argument 'axis' which tells whether to apply function on  the rows or the columns.
@@ -57,18 +57,18 @@ External data can be passed in same way as we did in DataFrameGroupBy
 ```python
     data = pd.Series([1,2,3])
     
-    def func(x, static_data):
-        return static_data.sum() + x.mean()
+    def func(x, data):
+        return data.sum() + x.mean()
 	
-    df.apply_parallel(func, static_data, num_processes=30)
+    df.apply_parallel(func, data=data, num_processes=30)
 ```
 ### Usage with Series
 Usage with Series is very similar to the usage with DataFrames and DataFrameGroupBy.
 ```python
     data = pd.Series([1,2,3])
     
-    def func(x, static_data):
-	    return static_data-x
+    def func(x, data):
+	    return data-x
     
-    series.apply_parallel(func, static_data, num_processes=30)
+    series.apply_parallel(func, data=data, num_processes=30)
 ```
