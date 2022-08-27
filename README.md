@@ -72,3 +72,5 @@ Usage with Series is very similar to the usage with DataFrames and DataFrameGrou
     
     series.apply_parallel(func, data=data, num_processes=30)
 ```
+
+
