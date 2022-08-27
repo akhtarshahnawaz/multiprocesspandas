@@ -19,15 +19,12 @@ def attachpandas():
     pd.core.series.Series.apply_parallel = series_apply_parallel
     pd.core.frame.DataFrame.apply_parallel = df_apply_parallel
 
-def group_apply_parallel(self, func, static_data=None, num_processes = cpu_count()):
+def group_apply_parallel(self, func, *static_data, num_processes=cpu_count(), **kwargs):
     """
     Add functionality to pandas so that you can do processing on groups on multiple cores at same time.
     - This method will pass each group dataframe to the passed func (including key columns on which the group is formed).
-    - If there is some external data that needs to be used by the function, pass it as a list in static_data, and then accept that list in your func.
-        You must have a named argument with name 'static_data' if you need to accept static data.
-        Individual items in static_data list needs to be accessed using indexing.
     """
-    func = func if static_data is None else functools.partial(func, static_data=static_data)
+    func = functools.partial(func, *static_data, **kwargs)
     with Pool(num_processes) as p:
         ret_list = p.map(func, [df.copy() for idx, df in self])
 
@@ -42,15 +39,12 @@ pd.core.groupby.generic.DataFrameGroupBy.apply_parallel = group_apply_parallel
 
 
 
-def series_apply_parallel(self, func, static_data=None, num_processes = cpu_count()):
+def series_apply_parallel(self, func, *static_data, num_processes=cpu_count(), **kwargs):
     """
     Add functionality to pandas so that you can do processing on series on multiple cores at same time.
     - This method will pass individual items from series to the func.
-    - If there is some external data that needs to be used by the function, pass it as a list in static_data, and then accept that list in your func.
-        You must have a named argument with name 'static_data' if you need to accept static data.
-        Individual items in static_data list needs to be accessed using indexing.
     """        
-    func = func if static_data is None else functools.partial(func, static_data=static_data)
+    func = functools.partial(func, *static_data, **kwargs)
     with Pool(num_processes) as p:
         ret_list = p.map(func, self.values.tolist())
 
@@ -62,16 +56,13 @@ def series_apply_parallel(self, func, static_data=None, num_processes = cpu_coun
 pd.core.series.Series.apply_parallel = series_apply_parallel
 
 
-def df_apply_parallel(self, func, static_data=None, num_processes = cpu_count(), axis=0):
+def df_apply_parallel(self, func, *static_data, num_processes=cpu_count(), axis=0, **kwargs):
     """
     Add functionality to pandas so that you can do processing on dataframes on multiple cores at same time.
     - This method will pass individual rows/columns from dataframe to the func.
-    - If there is some external data that needs to be used by the function, pass it as a list in static_data, and then accept that list in your func.
-        You must have a named argument with name 'static_data' if you need to accept static data.
-        Individual items in static_data list needs to be accessed using indexing.
     - Pass axis=1 if you want to process on columns. By default, axis=0 i.e. each rows
     """          
-    func = func if static_data is None else functools.partial(func, static_data=static_data)
+    func = functools.partial(func, *static_data, **kwargs)
     with Pool(num_processes) as p:
         if axis==0:
             ret_list = p.map(func, [row for _, row in self.iterrows()])
