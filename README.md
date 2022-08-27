@@ -5,7 +5,7 @@ MultiprocessPandas package extends functionality of Pandas to easily run operati
 Importing the applyparallel module will add ***apply_parallel()*** method to DataFrame, Series and DataFrameGroupBy, which will allow you to run operation on multiple cores.
 
 ## Installation
-The source code is currently hosted on GitHub at: [https://github.com/akhtarshahnawaz/multiprocesspandas](https://github.com/akhtarshahnawaz/multiprocesspandas). The package can be pulled from GitHub or can be installed from PyPi directly. 
+The package can be pulled from GitHub or can be installed from PyPi directly. 
 
 To install using pip
 ```python
