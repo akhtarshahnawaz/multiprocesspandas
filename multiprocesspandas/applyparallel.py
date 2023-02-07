@@ -26,8 +26,8 @@ def group_apply_parallel(self, func, num_processes=cpu_count(), n_chunks = None,
     Add functionality to pandas so that you can do processing on groups on multiple cores at same time.
     - This method will pass each group dataframe to the passed func (including key columns on which the group is formed).
     """
-
-    assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"
+    if n_chunks is not None:
+        assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"
     func = functools.partial(func, *args, **kwargs)
     chunk_size = (len(self)//(n_chunks if n_chunks is not None else num_processes))
 
@@ -53,7 +53,8 @@ def series_apply_parallel(self, func, num_processes=cpu_count(), n_chunks = None
     Add functionality to pandas so that you can do processing on series on multiple cores at same time.
     - This method will pass individual items from series to the func.
     """
-    assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"
+    if n_chunks is not None:
+        assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"
     func = functools.partial(func, *args, **kwargs)
     chunk_size = (self.shape[0]//(n_chunks if n_chunks is not None else num_processes))
 
@@ -77,8 +78,8 @@ def df_apply_parallel(self, func, num_processes=cpu_count(), n_chunks = None, ax
     - This method will pass individual rows/columns from dataframe to the func.
     - Pass axis=1 if you want to process on columns. By default, axis=0 i.e. each rows
     """       
-
-    assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"   
+    if n_chunks is not None:
+        assert n_chunks>=num_processes, "Number of chunks must be greater than number of processes"   
     func = functools.partial(func, *args, **kwargs)
     chunk_size = (self.shape[0]//(n_chunks if n_chunks is not None else num_processes))
 
