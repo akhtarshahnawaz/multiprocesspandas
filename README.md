@@ -53,7 +53,7 @@ If you need some external data inside **func()**, it has to be passed and receiv
         output = data1 - x['C'].mean()
         return output * data2
 
-    df.groupby(["A","B"]).apply_parallel(func, data1=data1, data2=data2, num_processes=30)
+    df.groupby(["A","B"]).apply_parallel(func, data1=data1, data2=data2, num_processes=30, n_chunks=None)
 ```
 
 ### Usage with DataFrame
@@ -64,7 +64,7 @@ Usage with DataFrames is very similar to the one with DataFrameGroupBy, however 
     def func(x):
         return x.mean()
 
-    df.apply_parallel(func, num_processes=30, axis=1)
+    df.apply_parallel(func, num_processes=30, axis=1, n_chunks=None)
 ```
 
 External data can be passed in same way as we did in DataFrameGroupBy
@@ -75,7 +75,7 @@ External data can be passed in same way as we did in DataFrameGroupBy
     def func(x, data):
         return data.sum() + x.mean()
 
-    df.apply_parallel(func, data=data, num_processes=30)
+    df.apply_parallel(func, data=data, num_processes=30, n_chunks=None)
 ```
 
 ### Usage with Series
@@ -88,5 +88,5 @@ Usage with Series is very similar to the usage with DataFrames and DataFrameGrou
     def func(x, data):
 	    return data-x
 
-    series.apply_parallel(func, data=data, num_processes=30)
+    series.apply_parallel(func, data=data, num_processes=30, n_chunks=None)
 ```
